@@ -32,4 +32,3 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     print(type(confidence[0]))
     return {'confidence': f"{confidence[0].item():.2%}", 'class': predicted_class}
-
