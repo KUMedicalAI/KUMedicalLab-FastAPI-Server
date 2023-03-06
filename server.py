@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile, File
 import numpy as np
 from tensorflow import keras
 from PIL import Image
+import uvicorn
 
 app = FastAPI()
 
@@ -16,9 +17,9 @@ def read_image(data) -> np.ndarray:
     return image
 
 
-@app.get("/")
+@app.get("/", tags=["Root"])
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Hello World, From Shai :D ... use /docs to proceed"}
 
 
 @app.post("/predict")
@@ -32,3 +33,6 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     print(type(confidence[0]))
     return {'confidence': f"{confidence[0].item():.2%}", 'class': predicted_class}
+
+if __name__ == "__main__":
+  uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
