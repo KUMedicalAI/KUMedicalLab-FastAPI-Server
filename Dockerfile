@@ -2,7 +2,7 @@ FROM python:3.8
 
 USER 10014
 
-sudo chown -R "$USER":"$USER" $HOME/.docker
+RUN sudo chown -R "$USER":"$USER" $HOME/.docker
 # 
 WORKDIR /code
 
